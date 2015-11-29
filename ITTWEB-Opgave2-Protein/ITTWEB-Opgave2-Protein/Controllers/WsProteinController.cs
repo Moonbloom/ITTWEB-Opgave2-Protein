@@ -7,11 +7,10 @@ using System.Net.Http;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System.Threading.Tasks;
 
 namespace ITTWEB_Opgave2_Protein.Controllers
 {
-    public class WsTodoController : ApiController
+    public class WsProteinController : ApiController
     {
         private readonly DBContext _db = new DBContext();
 
@@ -32,17 +31,17 @@ namespace ITTWEB_Opgave2_Protein.Controllers
 
         [HttpGet]
         [Authorize]
-        public List<TodoItem> GetUserTodoItems()
+        public ICollection<FoodIntake> GetFoodIntakes()
         {
             var userId = Request.GetOwinContext().Authentication.User.Identity.GetUserId();
 
             var currentUser = UserManager.FindById(userId);
-            return currentUser.TodoItems;
+            return currentUser.FoodIntakes;
         }
 
         [HttpPost]
         [Authorize]
-        public HttpResponseMessage PostTodoItem(TodoItemViewModel item)
+        public HttpResponseMessage PostFoodIntake(FoodIntake item)
         {
             var modelStateErrors = ModelState.Values.ToList();
 
@@ -66,11 +65,7 @@ namespace ITTWEB_Opgave2_Protein.Controllers
                     var userId = Request.GetOwinContext().Authentication.User.Identity.GetUserId();
 
                     var currentUser = UserManager.FindById(userId);
-                    currentUser.TodoItems.Add(new TodoItem
-                    {
-                        Completed = false,
-                        Task = item.Task
-                    });
+                    currentUser.FoodIntakes.Add(item);
 
                     UserManager.Update(currentUser);
                     return Request.CreateResponse(HttpStatusCode.Accepted);
@@ -84,34 +79,6 @@ namespace ITTWEB_Opgave2_Protein.Controllers
             {
                 return Request.CreateResponse<List<string>>(HttpStatusCode.BadRequest, errors);
             }
-        }
-
-        [HttpPost]
-        [Authorize]
-        public async Task<HttpResponseMessage> CompleteTodoItem(int id)
-        {
-            var item = _db.Todos.FirstOrDefault(t => t.Id == id);
-            if (item != null)
-            {
-                item.Completed = true;
-                await _db.SaveChangesAsync();
-            }
-
-            return Request.CreateResponse(HttpStatusCode.Accepted);
-        }
-
-        [HttpPost]
-        [Authorize]
-        public async Task<HttpResponseMessage> DeleteTodoItem(int id)
-        {
-            var item = _db.Todos.FirstOrDefault(t => t.Id == id);
-            if (item != null)
-            {
-                _db.Todos.Remove(item);
-                await _db.SaveChangesAsync();
-            }
-
-            return Request.CreateResponse(HttpStatusCode.Accepted);
         }
     }
 }
