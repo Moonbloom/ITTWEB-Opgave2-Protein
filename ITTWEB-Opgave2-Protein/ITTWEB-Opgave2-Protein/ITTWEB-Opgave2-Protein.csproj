@@ -192,10 +192,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\aspnet-ITTWEB_Opgave2_Protein-20140528085212.mdf" />
-    <Content Include="App_Data\aspnet-ITTWEB_Opgave2_Protein-20140528085212_log.ldf">
-      <DependentUpon>aspnet-ITTWEB_Opgave2_Protein-20140528085212.mdf</DependentUpon>
-    </Content>
     <Content Include="Assets\app\app.js" />
     <Content Include="Assets\app\controllers\homeCtrl.js" />
     <Content Include="Assets\app\controllers\registerCtrl.js" />
@@ -238,7 +234,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
       <SubType>Designer</SubType>

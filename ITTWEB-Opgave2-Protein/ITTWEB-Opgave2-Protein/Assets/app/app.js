@@ -7,7 +7,6 @@
     "todoManager"
 ]);
 
-
 app.config([
     "$provide", "$routeProvider", "$httpProvider", function($provide, $routeProvider, $httpProvider) {
 

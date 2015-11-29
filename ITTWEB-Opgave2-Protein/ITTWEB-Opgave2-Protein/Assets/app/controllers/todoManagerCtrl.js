@@ -14,7 +14,7 @@
                     Task: $scope.newTaskText
                 };
 
-                if ($scope.newTaskText != "") {
+                if ($scope.newTaskText !== "") {
                     $http.post("/api/WsTodo/PostTodoItem", item)
                         .success(function(data, status, headers, config) {
                             $scope.newTaskText = "";

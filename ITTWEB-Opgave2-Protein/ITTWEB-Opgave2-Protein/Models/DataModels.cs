@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,17 +19,43 @@ namespace ITTWEB_Opgave2_Protein.Models
             return userIdentity;
         }
 
-        public string FirstName { get; set; }
+        public string Name { get; set; }
+        public UserType UserType { get; set; }
+        public double Weight { get; set; }
 
-        public virtual List<TodoItem> TodoItems { get; set; }
+        public virtual ICollection<FoodIntake> FoodIntakes { get; set; }
+        public virtual ICollection<FoodPosibility> FoodPosibilities { get; set; } 
     }
-    
-    public class TodoItem
+
+    public enum UserType
+    {
+        Adult = 0,
+        TrainingAdult = 1,
+        Sick = 2
+    }
+
+    public class FoodIntake
     {
         [Key]
         public int Id { get; set; }
-        public string Task { get; set; }
-        public bool Completed { get; set; }
+        public DateTime Date { get; set; }
+        public int Amount { get; set; }
+
+        public int FoodPosibilityId { get; set; }
+        public virtual FoodPosibility FoodPosibility { get; set; }
+
+        public string UserId { get; set; }
+        public User User { get; set; }
+    }
+
+    public class FoodPosibility
+    {
+        [Key]
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int ProteinRatio { get; set; }
+
+        public virtual ICollection<User> Users { get; set; } 
     }
 
     public class DBContext : IdentityDbContext<User>
@@ -49,7 +76,7 @@ namespace ITTWEB_Opgave2_Protein.Models
             return new DBContext();
         }
 
-        public DbSet<TodoItem> Todos { get; set; }
+        public DbSet<FoodIntake> FoodIntakes { get; set; }
 
     }
 

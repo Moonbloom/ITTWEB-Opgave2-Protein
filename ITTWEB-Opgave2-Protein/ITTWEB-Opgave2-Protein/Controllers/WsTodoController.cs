@@ -13,6 +13,7 @@ namespace ITTWEB_Opgave2_Protein.Controllers
 {
     public class WsTodoController : ApiController
     {
+        /*
         private readonly DBContext _db = new DBContext();
 
         public RoleManager<IdentityRole> RoleManager { get; private set; }
@@ -114,6 +115,6 @@ namespace ITTWEB_Opgave2_Protein.Controllers
             }
 
             return Request.CreateResponse(HttpStatusCode.Accepted);
-        }
+        }*/
     }
 }
