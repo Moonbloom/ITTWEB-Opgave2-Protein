@@ -1,5 +1,6 @@
 ﻿using ITTWEB_Opgave2_Protein.Models;
 using System.Collections.Generic;
+using System.Data.Entity;
 using Microsoft.AspNet.Identity.Owin;
 using System.Linq;
 using System.Net;
@@ -31,12 +32,12 @@ namespace ITTWEB_Opgave2_Protein.Controllers
 
         [HttpGet]
         [Authorize]
-        public ICollection<FoodIntake> GetFoodIntakes()
+        public IList<FoodIntake> GetFoodIntakes()
         {
             var userId = Request.GetOwinContext().Authentication.User.Identity.GetUserId();
 
-            var currentUser = UserManager.FindById(userId);
-            return currentUser.FoodIntakes;
+            var user = _db.Users.Include(a => a.FoodIntakes).Include(b => b.FoodPosibilities).FirstOrDefault(x => x.Id == userId);
+            return user.FoodIntakes.ToList();
         }
 
         [HttpPost]

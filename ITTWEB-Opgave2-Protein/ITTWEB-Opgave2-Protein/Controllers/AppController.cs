@@ -27,5 +27,11 @@ namespace ITTWEB_Opgave2_Protein.Controllers
         {
             return PartialView();
         }
+
+        [Authorize]
+        public ActionResult NewProtein()
+        {
+            return PartialView();
+        }
     }
 }

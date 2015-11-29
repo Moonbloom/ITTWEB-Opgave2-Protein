@@ -6,6 +6,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.Http;
+using Newtonsoft.Json;
 
 namespace ITTWEB_Opgave2_Protein.Models
 {
@@ -78,6 +80,8 @@ namespace ITTWEB_Opgave2_Protein.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
         }
 
         public static DBContext Create()
