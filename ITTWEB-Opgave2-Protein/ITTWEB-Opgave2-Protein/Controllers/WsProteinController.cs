@@ -1,4 +1,5 @@
-﻿using ITTWEB_Opgave2_Protein.Models;
+﻿using System;
+using ITTWEB_Opgave2_Protein.Models;
 using System.Collections.Generic;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity.Owin;
@@ -31,13 +32,20 @@ namespace ITTWEB_Opgave2_Protein.Controllers
         }
 
         [HttpGet]
+        //NO AUTH
+        public IList<UserType> GetUserTypes()
+        {
+            return _db.UserTypes.ToList();
+        }
+
+        [HttpGet]
         [Authorize]
         public IList<FoodIntake> GetFoodIntakes()
         {
             var userId = Request.GetOwinContext().Authentication.User.Identity.GetUserId();
-
             var user = _db.Users.Include(a => a.FoodIntakes).Include(b => b.FoodPosibilities).FirstOrDefault(x => x.Id == userId);
-            return user.FoodIntakes.ToList();
+
+            return user.FoodIntakes.Where(x => x.Date.ToString("dd-MM-yyyy").Equals(DateTime.Now.ToString("dd-MM-yyyy"))).ToList();
         }
 
         [HttpPost]

@@ -23,13 +23,19 @@ namespace ITTWEB_Opgave2_Protein.Controllers
         }
 
         [Authorize]
-        public ActionResult TodoManager()
+        public ActionResult NewProtein()
         {
             return PartialView();
         }
 
         [Authorize]
-        public ActionResult NewProtein()
+        public ActionResult StatisticProtein()
+        {
+            return PartialView();
+        }
+
+        [Authorize]
+        public ActionResult SetupProtein()
         {
             return PartialView();
         }
