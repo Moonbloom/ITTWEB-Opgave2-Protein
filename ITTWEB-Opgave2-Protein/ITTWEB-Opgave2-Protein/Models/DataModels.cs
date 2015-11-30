@@ -50,8 +50,8 @@ namespace ITTWEB_Opgave2_Protein.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int ProteinRatio { get; set; }
-
+        public double ProteinRatio { get; set; }
+        
         public virtual ICollection<User> Users { get; set; }
         public virtual ICollection<FoodIntake> FoodIntakes { get; set; } 
     }

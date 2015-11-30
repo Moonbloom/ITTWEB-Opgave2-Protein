@@ -2,14 +2,18 @@
 
 <div class="row margin-top-5">
     <div class="col-md-12">
-        <ul class="list-group margin-top-5">
-            <li ng-repeat="item in foodIntakeData" class="list-group-item">
-                <ul class="list-inline">
-                    <li>
-                        <h3>{{item.Amount}}</h3>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Amount in gram</th>
+                <th>Protein in gram</th>
+            </tr>
+            <tr ng-repeat="item in foodIntakeData">
+                <td>{{item.FoodPosibility.Name }}</td>
+                <td>{{item.Amount}}</td>
+                <td>{{item.Protein}}</td>
+            </tr>
+        </table>
     </div>
 </div>
