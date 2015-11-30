@@ -5,8 +5,12 @@
                 var params = {
                     Email: $scope.username,
                     Password: $scope.password1,
-                    ConfirmPassword: $scope.password2
+                    ConfirmPassword: $scope.password2,
+                    Weight: $scope.weight,
+                    UserTypeId: $scope.selectedUserType.Id
                 };
+
+                console.log(params);
 
                 $http.post("/api/Account/Register", params)
                     .success(function(data, status, headers, config) {
@@ -24,6 +28,13 @@
                         $scope.showErrorMessage = true;
                     });
             };
+
+            $http.get("/api/WsProtein/GetUserTypes")
+                .success(function(data, status, headers, config) {
+                    $scope.availableUserTypes = data;
+
+                    $scope.selectedUserType = data[0];
+                });
 
             $scope.showAlert = false;
             $scope.showSuccess = false;

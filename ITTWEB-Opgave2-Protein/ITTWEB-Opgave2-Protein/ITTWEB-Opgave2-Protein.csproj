@@ -177,7 +177,6 @@
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\WsAccountController.cs" />
     <Compile Include="Controllers\WsProteinController.cs" />
-    <Compile Include="Controllers\WsTodoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -185,6 +184,8 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DataModels.cs" />
     <Compile Include="Controllers\Utility\ModelErrorChecker.cs" />
+    <Compile Include="Models\DBContext.cs" />
+    <Compile Include="Models\DbInitializer.cs" />
     <Compile Include="Models\TodoItemViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -195,10 +196,11 @@
   <ItemGroup>
     <Content Include="Assets\app\app.js" />
     <Content Include="Assets\app\controllers\homeCtrl.js" />
+    <Content Include="Assets\app\controllers\setupProteinCtrl.js" />
+    <Content Include="Assets\app\controllers\statisticProteinCtrl.js" />
     <Content Include="Assets\app\controllers\registerCtrl.js" />
     <Content Include="Assets\app\controllers\signInCtrl.js" />
     <Content Include="Assets\app\controllers\newProteinCtrl.js" />
-    <Content Include="Assets\app\controllers\todoManagerCtrl.js" />
     <Content Include="Assets\bootstrap\css\bootstrap-theme.css" />
     <Content Include="Assets\bootstrap\css\bootstrap-theme.min.css" />
     <Content Include="Assets\bootstrap\css\bootstrap.css" />
@@ -256,7 +258,6 @@
     <Content Include="Views\App\Home.cshtml" />
     <Content Include="Views\App\Register.cshtml" />
     <Content Include="Views\App\SignIn.cshtml" />
-    <Content Include="Views\App\TodoManager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
@@ -269,6 +270,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\App\NewProtein.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\App\StatisticProtein.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\App\SetupProtein.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

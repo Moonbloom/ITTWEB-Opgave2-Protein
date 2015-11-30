@@ -4,7 +4,6 @@
     "home",
     "signIn",
     "register",
-    "todoManager",
     "newProtein"
 ]);
 
@@ -60,14 +59,19 @@ app.config([
             controller: "signInCtrl"
         });
 
-        $routeProvider.when("/todomanager", {
-            templateUrl: "App/TodoManager",
-            controller: "todoManagerCtrl"
-        });
-
         $routeProvider.when("/newProtein", {
             templateUrl: "App/NewProtein",
             controller: "newProteinCtrl"
+        });
+
+        $routeProvider.when("/statisticProtein", {
+            templateUrl: "App/StatisticProtein",
+            controller: "statisticProteinCtrl"
+        });
+
+        $routeProvider.when("/setupProtein", {
+            templateUrl: "App/SetupProtein",
+            controller: "setupProteinCtrl"
         });
 
         $routeProvider.otherwise({
