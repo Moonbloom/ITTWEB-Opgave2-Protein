@@ -92,7 +92,7 @@ namespace ITTWEB_Opgave2_Protein.Controllers
 
         [HttpPost]
         [Authorize]
-        public HttpResponseMessage DeleteFoodIntake(int foodIntakeId)
+        public HttpResponseMessage DeleteFoodIntake([FromBody] int foodIntakeId)
         {
             var modelStateErrors = ModelState.Values.ToList();
 
