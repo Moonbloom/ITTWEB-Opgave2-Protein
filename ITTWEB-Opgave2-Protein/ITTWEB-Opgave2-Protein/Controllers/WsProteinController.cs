@@ -89,5 +89,45 @@ namespace ITTWEB_Opgave2_Protein.Controllers
                 return Request.CreateResponse<List<string>>(HttpStatusCode.BadRequest, errors);
             }
         }
+
+        [HttpPost]
+        [Authorize]
+        public HttpResponseMessage DeleteFoodIntake(int foodIntakeId)
+        {
+            var modelStateErrors = ModelState.Values.ToList();
+
+            var errors = new List<string>();
+
+            foreach (var s in modelStateErrors)
+            {
+                foreach (var e in s.Errors)
+                {
+                    if (e.ErrorMessage != null && e.ErrorMessage.Trim() != "")
+                    {
+                        errors.Add(e.ErrorMessage);
+                    }
+                }
+            }
+
+            if (errors.Count == 0)
+            {
+                try
+                {
+                    var foodIntakeitem = _db.FoodIntakes.FirstOrDefault(x => x.Id == foodIntakeId);
+                    _db.FoodIntakes.Remove(foodIntakeitem);
+                    _db.SaveChanges();
+
+                    return Request.CreateResponse(HttpStatusCode.Accepted);
+                }
+                catch
+                {
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError);
+                }
+            }
+            else
+            {
+                return Request.CreateResponse<List<string>>(HttpStatusCode.BadRequest, errors);
+            }
+        }
     }
 }
