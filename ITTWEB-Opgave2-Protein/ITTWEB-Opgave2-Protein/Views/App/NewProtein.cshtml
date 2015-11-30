@@ -1,18 +1,40 @@
-﻿<h2>New Protein</h2>
-
+﻿<h2>Daily Summary</h2>
 <div class="row margin-top-5">
     <div class="col-md-12">
-
         <table class="table">
             <tr>
-                <th>Name</th>
-                <th>Amount in gram</th>
-                <th>Protein in gram</th>
+                <th>Total protein intake</th>
+                <th>Daily recomended intake</th>
+                <th>Percentage</th>
+                <th>Protein left</th>
+            </tr>
+            <tr >
+                <td>200 g</td>
+                <td>150 g</td>
+                <td>75 %</td>
+                <td>50 g</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<h2>Protein Intakes</h2>
+<div class="row margin-top-5">
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>Food Type</th>
+                <th>Amount</th>
+                <th>Protein</th>
+                <th></th>
+                
             </tr>
             <tr ng-repeat="item in foodIntakeData">
-                <td>{{item.FoodPosibility.Name }}</td>
-                <td>{{item.Amount}}</td>
-                <td>{{item.Protein}}</td>
+                <td>{{item.FoodPosibility.Name}}</td>
+                <td>{{item.Amount}} g</td>
+                <td>{{item.Protein}} g</td>
+                <td>
+                    <button ng-click="deleteRow($index)">Delete</button>
+                </td>
             </tr>
         </table>
     </div>

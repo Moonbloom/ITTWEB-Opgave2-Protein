@@ -20,7 +20,10 @@
                 console.log(data);
                 return data;
             }
-            
+            $scope.deleteRow = function (index) {
+                console.log(index);
+                console.log($scope.foodIntakeData[index].Id);
+            };
 
             //Get the current user's list when the page loads.
             $scope.getList();
