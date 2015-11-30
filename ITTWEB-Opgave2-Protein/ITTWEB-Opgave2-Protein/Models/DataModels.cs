@@ -64,7 +64,7 @@ namespace ITTWEB_Opgave2_Protein.Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public int ProteinRatio { get; set; }
+        public double ProteinRatio { get; set; }
 
         public virtual ICollection<User> Users { get; set; } 
     }
@@ -113,19 +113,84 @@ namespace ITTWEB_Opgave2_Protein.Models
             };
             context.Users.Add(user);
 
-            var foodPosibility1 = new FoodPosibility
+            #region FoodPosibilitySeed
+            var Potato = new FoodPosibility
             {
+                Id = 1,
                 Name = "Potato",
-                ProteinRatio = 40
+                ProteinRatio = 0.019
             };
-            context.FoodPosibilities.Add(foodPosibility1);
+            context.FoodPosibilities.Add(Potato);
+         
+            var GreenBeans = new FoodPosibility
+            {
+                Id = 2,
+                Name = "Green Beans",
+                ProteinRatio = 0.02
+            };
+            context.FoodPosibilities.Add(GreenBeans);
+            
+            var RyeBread = new FoodPosibility
+               {
+                Id = 3,
+                   Name = "Rye bread",
+                   ProteinRatio = 0.062
+               };
+               context.FoodPosibilities.Add(RyeBread);
+               var Oatmeal = new FoodPosibility
+               {
+                   Id =4,
+                   Name = "Oatmeal",
+                   ProteinRatio = 0.133
+               };
+               context.FoodPosibilities.Add(Oatmeal);
+               var Milk = new FoodPosibility
+               {
+                   Id =5,
+                   Name = "Milk",
+                   ProteinRatio = 0.133
+               };
+               context.FoodPosibilities.Add(Milk);
+
+               var Egg = new FoodPosibility
+               {
+                   Id = 6,
+                   Name = "Egg",
+                   ProteinRatio = 0.126
+               };
+               context.FoodPosibilities.Add(Egg);
+               var Chicken = new FoodPosibility
+               {
+                   Id = 7,
+                   Name = "Chicken",
+                   ProteinRatio = 0.20
+               };
+               context.FoodPosibilities.Add(Chicken);
+               var Pork = new FoodPosibility
+               {
+                   Id = 8,
+                   Name = "Pork",
+                   ProteinRatio = 0.20
+               };
+               context.FoodPosibilities.Add(Pork);
+               var Beef = new FoodPosibility()
+               {
+                   Id = 9,
+                   Name = "Beef",
+                   ProteinRatio = 0.20
+               };
+               context.FoodPosibilities.Add(Beef);
+               
+            #endregion
+
+
 
             var foodIntake1 = new FoodIntake
             {
                 UserId = user.Id,
                 Amount = 70,
                 Date = DateTime.Now,
-                FoodPosibilityId = foodPosibility1.Id
+                FoodPosibilityId = Potato.Id
             };
             context.FoodIntakes.Add(foodIntake1);
 
