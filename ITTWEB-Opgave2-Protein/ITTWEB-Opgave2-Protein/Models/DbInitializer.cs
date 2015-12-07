@@ -28,18 +28,6 @@ namespace ITTWEB_Opgave2_Protein.Models
             };
             context.UserTypes.Add(userType3);
 
-            var user = new User
-            {
-                Id = "24bbcc10-5ab3-4beb-9261-da210cda00eb",
-                UserTypeId = 1,
-                Weight = 80,
-                Email = "lol",
-                PasswordHash = "ANyTo3lyBaGCuF7QqPr1pCZel2nRM2rWYjqepLSqtNoYfoPTO9X7bZICaoJL7jSISg==",
-                SecurityStamp = "704ea163-b098-4dea-b027-bbd1bea72a0d",
-                UserName = "lol"
-            };
-            context.Users.Add(user);
-
             #region FoodPosibilitySeed
             var potato = new FoodPosibility
             {
@@ -47,7 +35,6 @@ namespace ITTWEB_Opgave2_Protein.Models
                 Name = "Potato",
                 ProteinRatio = 0.019,
             };
-            potato.Users.Add(user);
             context.FoodPosibilities.Add(potato);
 
             var greenBeans = new FoodPosibility
@@ -56,7 +43,6 @@ namespace ITTWEB_Opgave2_Protein.Models
                 Name = "Green Beans",
                 ProteinRatio = 0.02
             };
-            greenBeans.Users.Add(user);
             context.FoodPosibilities.Add(greenBeans);
 
             var ryeBread = new FoodPosibility
@@ -65,7 +51,6 @@ namespace ITTWEB_Opgave2_Protein.Models
                 Name = "Rye bread",
                 ProteinRatio = 0.062
             };
-            ryeBread.Users.Add(user);
             context.FoodPosibilities.Add(ryeBread);
 
             var oatmeal = new FoodPosibility
@@ -115,9 +100,23 @@ namespace ITTWEB_Opgave2_Protein.Models
                 ProteinRatio = 0.20
             };
             context.FoodPosibilities.Add(beef);
-
             #endregion
 
+            #region User
+            var user = new User
+            {
+                Id = "24bbcc10-5ab3-4beb-9261-da210cda00eb",
+                UserTypeId = 1,
+                Weight = 80,
+                Email = "lol",
+                PasswordHash = "ANyTo3lyBaGCuF7QqPr1pCZel2nRM2rWYjqepLSqtNoYfoPTO9X7bZICaoJL7jSISg==",
+                SecurityStamp = "704ea163-b098-4dea-b027-bbd1bea72a0d",
+                UserName = "lol"
+            };
+            context.Users.Add(user);
+            #endregion
+
+            #region Food intake
             var foodIntake1 = new FoodIntake
             {
                 UserId = user.Id,
@@ -126,6 +125,7 @@ namespace ITTWEB_Opgave2_Protein.Models
                 FoodPosibilityId = potato.Id
             };
             context.FoodIntakes.Add(foodIntake1);
+            #endregion
 
             context.SaveChanges();
         }

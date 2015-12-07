@@ -11,8 +11,7 @@ namespace ITTWEB_Opgave2_Protein.Models
         {
             Database.SetInitializer(new DbInitializer());
         }
-
-        //Override default table names
+        
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
