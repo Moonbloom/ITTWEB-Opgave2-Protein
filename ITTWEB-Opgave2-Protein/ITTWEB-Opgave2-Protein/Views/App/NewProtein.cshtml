@@ -30,11 +30,41 @@
                 
             </tr>
             <tr ng-repeat="item in foodIntakeData">
-                <td>{{item.FoodPosibility.Name}}</td>
-                <td>{{item.Amount}} g</td>
-                <td>{{item.Protein}} g</td>
                 <td>
-                    <button ng-click="deleteRow($index)">Delete</button>
+                    <select class="form-control" 
+                            ng-options="foodPos.Name for foodPos in foodPosibilities track by foodPos.Id"
+                            ng-model="item.FoodPosibility"></select>
+                </td>
+ 
+                <td>
+                    <input class="form-control" ng-model="item.Amount"/>
+                </td>
+                <td>
+                    <input class="form-control" ng-model="item.Protein" />
+                </td>
+                <td>
+                    <button class="form-control" ng-click="deleteRow($index)">Delete</button>
+                </td>
+                <td>
+                    <button class="form-control" ng-click="updateRow($index)">Update</button>
+                </td>
+            </tr>
+            <tr id="NewFoodIntake">
+                <td>
+                    <select class="form-control"
+                            ng-options="foodPos.Name for foodPos in foodPosibilities track by foodPos.Id"
+                            ng-model="newSelectedFoodPos"></select>
+                </td>
+
+                <td>
+                    <input class="form-control" id="Amount" />
+                </td>
+                <td>
+                    <input class="form-control" id="Protein" />
+                </td>
+                <td/>
+                <td>
+                    <button class="form-control" ng-click="updateRow($index)">Create</button>
                 </td>
             </tr>
         </table>

@@ -113,6 +113,9 @@ namespace ITTWEB_Opgave2_Protein.Models
                 SecurityStamp = "704ea163-b098-4dea-b027-bbd1bea72a0d",
                 UserName = "lol"
             };
+            user.FoodPosibilities.Add(potato);
+            user.FoodPosibilities.Add(greenBeans);
+            user.FoodPosibilities.Add(ryeBread);
             context.Users.Add(user);
             #endregion
 
@@ -125,11 +128,16 @@ namespace ITTWEB_Opgave2_Protein.Models
                 FoodPosibilityId = potato.Id
             };
             context.FoodIntakes.Add(foodIntake1);
+
+            var foodIntake2 = new FoodIntake
+            {
+                UserId = user.Id,
+                Amount = 110,
+                Date = DateTime.Now,
+                FoodPosibilityId = greenBeans.Id
+            };
+            context.FoodIntakes.Add(foodIntake2);
             #endregion
-
-            context.SaveChanges();
-
-            user.FoodPosibilities.Add(potato);
 
             context.SaveChanges();
         }
