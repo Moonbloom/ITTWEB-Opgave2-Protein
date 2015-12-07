@@ -3,7 +3,7 @@
 <div class="row margin-top-5">
     <div class="col-md-12">
         <table class="table">
-            <tr>
+            <tr >
                 <th>Total protein intake</th>
                 <th>Daily recomended intake</th>
                 <th>Percentage</th>
@@ -24,8 +24,8 @@
         <table class="table">
             <tr>
                 <th>Food Type</th>
-                <th>Amount</th>
-                <th>Protein</th>
+                <th>Amount in gram</th>
+                <th>Protein in gram</th>
                 <th></th>
                 
             </tr>
@@ -37,7 +37,7 @@
                 </td>
  
                 <td>
-                    <input type="number" class="form-control small" ng-model="item.Amount"/>
+                    <input type="number" min="0" class="form-control small" ng-model="item.Amount" ng-change="calcEachProtein(item)"/>
                 </td>
                 <td>
                     <div class="small">{{item.Protein}}</div>
@@ -58,14 +58,14 @@
                 </td>
 
                 <td>
-                    <input type="number" class="form-control small" ng-model="newFoodIntake.Amount" ng-change="calcEachProtein(newFoodIntake)" />
+                    <input type="number" min="0" class="form-control small" ng-model="newFoodIntake.Amount" ng-change="calcEachProtein(newFoodIntake)" />
                 </td>
                 <td>
                     <div class="small">{{newFoodIntake.Protein}}</div>
                 </td>
                 <td/>
                 <td>
-                    <button class="form-control small" ng-click="postFoodIntake($index)">Create</button>
+                    <button class="form-control small" ng-click="postFoodIntake()">Create</button>
                 </td>
             </tr>
         </table>

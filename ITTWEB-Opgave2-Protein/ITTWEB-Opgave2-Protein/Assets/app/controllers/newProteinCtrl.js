@@ -13,10 +13,21 @@
                 $http.get("/api/WsProtein/GetFoodIntakes")
                     .success(function (data, status, headers, config) {
                         $scope.foodIntakeData = calcProtein(data);
+                        calcDailySummary();
                     })
                     .error(function (data, status, headers, config) {
                         console.log(data);
                     });
+            };
+
+            var getUserPref = function () {
+                $http.get("/api/WsAccount/GetUserPreferences")
+                .success(function (data, status, headers, config) {
+                    $scope.userData = data;
+                })
+                .error(function (data, status, headers, config) {
+                    console.log(data);
+                });
             };
 
             var getFoodPosibilities = function () {
@@ -30,6 +41,10 @@
                     });
             };
             
+            var calcDailySummary = function () {
+
+            }
+
             $scope.deleteRow = function (index) {
                 var deleteId = $scope.foodIntakeData[index].Id;
                 $http.post("/api/WsProtein/DeleteFoodIntake", deleteId)
@@ -49,9 +64,10 @@
                     });
             };
 
-            $scope.postFoodIntake = function (index) {
-                var update = $scope.foodIntakeData[index];
-                $http.post("/api/WsProtein/PostFoodIntake", update)
+            $scope.postFoodIntake = function () {
+                var post = $scope.newFoodIntake;
+                post.FoodPosibilityId = post.FoodPosibility.Id;
+                $http.post("/api/WsProtein/PostFoodIntake", post)
                     .success(function (data, status, headers, config) {
                         getList();
                     })
@@ -60,18 +76,18 @@
                     });
             };
 
-            
             $scope.calcEachProtein = function (data) {
                 if (data.Amount && data.FoodPosibility) {
-                    return data.Protein = (data.Amount) * (data.FoodPosibility.ProteinRatio);
+                    return data.Protein = ((data.Amount) * (data.FoodPosibility.ProteinRatio)).toFixed(2);
                 }
                 else
-                    return data.Protein = "-";
+                    return data.Protein = "";
                 
             }
 
             //Get the current user's list when the page loads.
             getList();
             getFoodPosibilities();
+            getUserPref();
         }
     ]);

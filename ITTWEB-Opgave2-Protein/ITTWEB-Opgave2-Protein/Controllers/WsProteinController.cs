@@ -2,6 +2,7 @@
 using ITTWEB_Opgave2_Protein.Models;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using Microsoft.AspNet.Identity.Owin;
 using System.Linq;
 using System.Net;
@@ -69,12 +70,12 @@ namespace ITTWEB_Opgave2_Protein.Controllers
             {
                 try
                 {
-                    var userId = Request.GetOwinContext().Authentication.User.Identity.GetUserId();
+                    item.Date = DateTime.Now;
+                    item.UserId = Request.GetOwinContext().Authentication.User.Identity.GetUserId(); ;
 
-                    var currentUser = UserManager.FindById(userId);
-                    currentUser.FoodIntakes.Add(item);
-
-                    UserManager.Update(currentUser);
+                    _db.FoodIntakes.Add(item);
+                    _db.SaveChanges();
+                    
                     return Request.CreateResponse(HttpStatusCode.Accepted);
                 }
                 catch
@@ -98,8 +99,7 @@ namespace ITTWEB_Opgave2_Protein.Controllers
             {
                 try
                 {
-                    _db.FoodIntakes.Attach(item);
-                    _db.Entry(item).State = EntityState.Modified;
+                    _db.FoodIntakes.AddOrUpdate(item);
                     _db.SaveChanges();
 
                     return Request.CreateResponse(HttpStatusCode.Accepted);
