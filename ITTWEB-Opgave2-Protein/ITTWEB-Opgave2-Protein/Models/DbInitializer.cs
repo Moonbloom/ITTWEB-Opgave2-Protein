@@ -45,8 +45,9 @@ namespace ITTWEB_Opgave2_Protein.Models
             {
                 Id = 1,
                 Name = "Potato",
-                ProteinRatio = 0.019
+                ProteinRatio = 0.019,
             };
+            potato.Users.Add(user);
             context.FoodPosibilities.Add(potato);
 
             var greenBeans = new FoodPosibility
@@ -55,6 +56,7 @@ namespace ITTWEB_Opgave2_Protein.Models
                 Name = "Green Beans",
                 ProteinRatio = 0.02
             };
+            greenBeans.Users.Add(user);
             context.FoodPosibilities.Add(greenBeans);
 
             var ryeBread = new FoodPosibility
@@ -63,6 +65,7 @@ namespace ITTWEB_Opgave2_Protein.Models
                 Name = "Rye bread",
                 ProteinRatio = 0.062
             };
+            ryeBread.Users.Add(user);
             context.FoodPosibilities.Add(ryeBread);
 
             var oatmeal = new FoodPosibility
