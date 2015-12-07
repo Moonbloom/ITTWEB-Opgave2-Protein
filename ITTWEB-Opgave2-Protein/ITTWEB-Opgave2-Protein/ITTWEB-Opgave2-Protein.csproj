@@ -176,6 +176,7 @@
     <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\WsAccountController.cs" />
+    <Compile Include="Controllers\WsStatisticController.cs" />
     <Compile Include="Controllers\WsProteinController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
