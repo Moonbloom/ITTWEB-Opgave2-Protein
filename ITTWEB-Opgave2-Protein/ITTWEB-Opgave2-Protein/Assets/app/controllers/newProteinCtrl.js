@@ -38,8 +38,19 @@
                     });
             };
 
-            $scope.updateRow = function (index) {             
-                var update = $scope.foodIntakeData[index];  
+            $scope.updateFoodIntake = function (index) {
+                var update = $scope.foodIntakeData[index];
+                $http.post("/api/WsProtein/UpdateFoodIntake", update)
+                    .success(function (data, status, headers, config) {
+                        getList();
+                    })
+                    .error(function (data, status, headers, config) {
+                        console.log(data);
+                    });
+            };
+
+            $scope.postFoodIntake = function (index) {
+                var update = $scope.foodIntakeData[index];
                 $http.post("/api/WsProtein/PostFoodIntake", update)
                     .success(function (data, status, headers, config) {
                         getList();

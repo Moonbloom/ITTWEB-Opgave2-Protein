@@ -90,6 +90,33 @@ namespace ITTWEB_Opgave2_Protein.Controllers
 
         [HttpPost]
         [Authorize]
+        public HttpResponseMessage UpdateFoodIntake(FoodIntake item)
+        {
+            var errors = CheckErrors(ModelState.Values.ToList());
+
+            if (errors.Count == 0)
+            {
+                try
+                {
+                    _db.FoodIntakes.Attach(item);
+                    _db.Entry(item).State = EntityState.Modified;
+                    _db.SaveChanges();
+
+                    return Request.CreateResponse(HttpStatusCode.Accepted);
+                }
+                catch
+                {
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError);
+                }
+            }
+            else
+            {
+                return Request.CreateResponse<List<string>>(HttpStatusCode.BadRequest, errors);
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
         public HttpResponseMessage DeleteFoodIntake([FromBody] int foodIntakeId)
         {
             var errors = CheckErrors(ModelState.Values.ToList());

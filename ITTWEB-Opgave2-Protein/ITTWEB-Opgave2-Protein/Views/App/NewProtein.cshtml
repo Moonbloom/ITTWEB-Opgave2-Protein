@@ -46,7 +46,7 @@
                     <button class="form-control small" ng-click="deleteRow($index)">Delete</button>
                 </td>
                 <td>
-                    <button class="form-control small" ng-click="updateRow($index)">Update</button>
+                    <button class="form-control small" ng-click="updateFoodIntake($index)">Update</button>
                 </td>
             </tr>
             <tr ng-model="newFoodIntake" id="new-food-intake">
@@ -65,7 +65,7 @@
                 </td>
                 <td/>
                 <td>
-                    <button class="form-control small" ng-click="updateRow($index)">Create</button>
+                    <button class="form-control small" ng-click="postFoodIntake($index)">Create</button>
                 </td>
             </tr>
         </table>
