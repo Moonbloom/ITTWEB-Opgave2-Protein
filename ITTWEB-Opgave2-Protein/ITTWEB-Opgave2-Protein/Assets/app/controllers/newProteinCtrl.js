@@ -4,7 +4,7 @@
 
             var calcProtein = function (data) {
                 for (var i = 0, len = data.length; i < len; i++) {
-                    $scope.calcEachProtein(data[i]);
+                    calcEachProtein(data[i]);
                 }
                 return data;
             }
@@ -40,21 +40,46 @@
                         console.log(data);
                     });
             };
-            
-            var calcDailySummary = function () {
 
+            var calcDailySummary = function () {
+                $scope.dailySummary = {};
+                $scope.dailySummary.total = calcDailyTotal();
+                $scope.dailySummary.daily = calcDailyDaily();
+            }
+
+            var calcDailyTotal = function () {
+                var data = $scope.foodIntakeData;
+                var totalProtein = 0;
+                for (var i = 0; i < data.length; i++) {
+                    console.log(data[i].Protein);
+                    totalProtein += parseFloat(data[i].Protein);
+                }
+                return totalProtein.toFixed(2);
+            }
+            var calcDailyDaily = function () {
+                var user = $scope.userData;
+                switch (user.UserType.Id) {
+                    case 1:
+                        return user.Weight * 0.8;
+                    case 2:
+                        return user.Weight * 1.5;
+                    case 3:
+                        return user.Weight * 2.0;
+                    default:
+                        return 0;
+                }
             }
 
             $scope.deleteRow = function (index) {
                 var deleteId = $scope.foodIntakeData[index].Id;
                 $http.post("/api/WsProtein/DeleteFoodIntake", deleteId)
-                    .success(function(data, status, headers, config) {
+                    .success(function (data, status, headers, config) {
                         getList();
                     });
             };
 
-            $scope.updateRow = function (index) {             
-                var update = $scope.foodIntakeData[index];  
+            $scope.updateRow = function (index) {
+                var update = $scope.foodIntakeData[index];
                 $http.post("/api/WsProtein/PostFoodIntake", update)
                     .success(function (data, status, headers, config) {
                         getList();
@@ -64,14 +89,18 @@
                     });
             };
 
-            
-            $scope.calcEachProtein = function (data) {
+
+            var calcEachProtein = function (data) {
                 if (data.Amount && data.FoodPosibility) {
                     return data.Protein = ((data.Amount) * (data.FoodPosibility.ProteinRatio)).toFixed(2);
                 }
                 else
                     return data.Protein = "";
-                
+
+            }
+            $scope.calcEachProteinTable = function (data) {
+                calcEachProtein(data);
+                calcDailySummary();
             }
 
             //Get the current user's list when the page loads.
