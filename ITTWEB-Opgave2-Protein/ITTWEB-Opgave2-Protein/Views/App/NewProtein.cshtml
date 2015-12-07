@@ -49,7 +49,7 @@
                     <button class="form-control" ng-click="updateRow($index)">Update</button>
                 </td>
             </tr>
-            <tr id="NewFoodIntake">
+            <tr ng-model="newFoodIntake" id="new-food-intake">
                 <td>
                     <select class="form-control"
                             ng-options="foodPos.Name for foodPos in foodPosibilities track by foodPos.Id"
@@ -57,7 +57,7 @@
                 </td>
 
                 <td>
-                    <input class="form-control" id="Amount" />
+                    <input class="form-control" ng-model="newFoodIntake.Amount" />
                 </td>
                 <td>
                     <input class="form-control" id="Protein" />
