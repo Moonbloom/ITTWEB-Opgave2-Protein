@@ -27,7 +27,6 @@
                 <th>Amount in gram</th>
                 <th>Protein in gram</th>
                 <th></th>
-                
             </tr>
             <tr ng-repeat="item in foodIntakeData">
                 <td>
@@ -35,7 +34,6 @@
                             ng-options="foodPos.Name for foodPos in foodPosibilities track by foodPos.Id"
                             ng-model="item.FoodPosibility"></select>
                 </td>
- 
                 <td>
                     <input type="number" min="0" class="form-control small" ng-model="item.Amount" ng-change="calcEachProtein(item)"/>
                 </td>

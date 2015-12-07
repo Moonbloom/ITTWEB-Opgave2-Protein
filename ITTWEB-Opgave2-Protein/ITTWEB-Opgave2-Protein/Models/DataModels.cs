@@ -49,7 +49,7 @@ namespace ITTWEB_Opgave2_Protein.Models
         public virtual FoodPosibility FoodPosibility { get; set; }
 
         public string UserId { get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
     }
 
     public class FoodPosibility

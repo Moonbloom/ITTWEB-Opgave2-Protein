@@ -6,12 +6,14 @@
                 for (var i = 0, len = data.length; i < len; i++) {
                     $scope.calcEachProtein(data[i]);
                 }
+
                 return data;
             }
 
             var getList = function () {
                 $http.get("/api/WsProtein/GetFoodIntakes")
                     .success(function (data, status, headers, config) {
+                        console.log(data);
                         $scope.foodIntakeData = calcProtein(data);
                         calcDailySummary();
                     })

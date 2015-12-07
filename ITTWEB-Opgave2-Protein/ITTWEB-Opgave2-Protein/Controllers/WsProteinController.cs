@@ -3,35 +3,18 @@ using ITTWEB_Opgave2_Protein.Models;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
-using Microsoft.AspNet.Identity.Owin;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ITTWEB_Opgave2_Protein.Controllers
 {
     public class WsProteinController : ApiController
     {
         private readonly DBContext _db = new DBContext();
-
-        public RoleManager<IdentityRole> RoleManager { get; private set; }
-
-        private ApplicationUserManager _userManager;
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
 
         [HttpGet]
         //NO AUTH
@@ -45,7 +28,7 @@ namespace ITTWEB_Opgave2_Protein.Controllers
         public IList<FoodIntake> GetFoodIntakes()
         {
             var userId = Request.GetOwinContext().Authentication.User.Identity.GetUserId();
-            var user = _db.Users.Include(a => a.FoodIntakes).FirstOrDefault(x => x.Id == userId);
+            var user = _db.Users.Include(a => a.FoodIntakes).Include(b => b.FoodPosibilities).FirstOrDefault(x => x.Id == userId);
 
             return user.FoodIntakes.Where(x => x.Date.ToString("dd-MM-yyyy").Equals(DateTime.Now.ToString("dd-MM-yyyy"))).ToList();
         }
@@ -71,11 +54,12 @@ namespace ITTWEB_Opgave2_Protein.Controllers
                 try
                 {
                     item.Date = DateTime.Now;
-                    item.UserId = Request.GetOwinContext().Authentication.User.Identity.GetUserId(); ;
+                    item.UserId = Request.GetOwinContext().Authentication.User.Identity.GetUserId();
+                    item.FoodPosibility = null;
 
                     _db.FoodIntakes.Add(item);
                     _db.SaveChanges();
-                    
+
                     return Request.CreateResponse(HttpStatusCode.Accepted);
                 }
                 catch
