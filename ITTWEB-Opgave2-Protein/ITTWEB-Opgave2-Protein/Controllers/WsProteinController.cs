@@ -7,7 +7,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -44,26 +43,29 @@ namespace ITTWEB_Opgave2_Protein.Controllers
         public IList<FoodIntake> GetFoodIntakes()
         {
             var userId = Request.GetOwinContext().Authentication.User.Identity.GetUserId();
-            var user = _db.Users.Include(a => a.FoodIntakes).FirstOrDefault(x => x.Id == userId);
+            var user = _db.Users.Include(a => a.FoodIntakes).Include(b => b.FoodPosibilities).FirstOrDefault(x => x.Id == userId);
 
             return user.FoodIntakes.Where(x => x.Date.ToString("dd-MM-yyyy").Equals(DateTime.Now.ToString("dd-MM-yyyy"))).ToList();
-        }
-
-        [HttpGet]
-        [Authorize]
-        public IList<FoodPosibility> GetFoodPosibilities()
-        {
-            var userId = Request.GetOwinContext().Authentication.User.Identity.GetUserId();
-            var user = _db.Users.Include(b => b.FoodPosibilities).FirstOrDefault(x => x.Id == userId);
-
-            return user.FoodPosibilities.ToList();
         }
 
         [HttpPost]
         [Authorize]
         public HttpResponseMessage PostFoodIntake(FoodIntake item)
         {
-            var errors = CheckErrors(ModelState.Values.ToList());
+            var modelStateErrors = ModelState.Values.ToList();
+
+            var errors = new List<string>();
+
+            foreach (var s in modelStateErrors)
+            {
+                foreach (var e in s.Errors)
+                {
+                    if (e.ErrorMessage != null && e.ErrorMessage.Trim() != "")
+                    {
+                        errors.Add(e.ErrorMessage);
+                    }
+                }
+            }
 
             if (errors.Count == 0)
             {
@@ -92,7 +94,20 @@ namespace ITTWEB_Opgave2_Protein.Controllers
         [Authorize]
         public HttpResponseMessage DeleteFoodIntake([FromBody] int foodIntakeId)
         {
-            var errors = CheckErrors(ModelState.Values.ToList());
+            var modelStateErrors = ModelState.Values.ToList();
+
+            var errors = new List<string>();
+
+            foreach (var s in modelStateErrors)
+            {
+                foreach (var e in s.Errors)
+                {
+                    if (e.ErrorMessage != null && e.ErrorMessage.Trim() != "")
+                    {
+                        errors.Add(e.ErrorMessage);
+                    }
+                }
+            }
 
             if (errors.Count == 0)
             {
@@ -114,25 +129,5 @@ namespace ITTWEB_Opgave2_Protein.Controllers
                 return Request.CreateResponse<List<string>>(HttpStatusCode.BadRequest, errors);
             }
         }
-
-        #region Private functions
-        private List<string> CheckErrors(IEnumerable<ModelState> list)
-        {
-            var errors = new List<string>();
-
-            foreach (var s in list)
-            {
-                foreach (var e in s.Errors)
-                {
-                    if (e.ErrorMessage != null && e.ErrorMessage.Trim() != "")
-                    {
-                        errors.Add(e.ErrorMessage);
-                    }
-                }
-            }
-
-            return errors;
-        }
-        #endregion
     }
 }

@@ -3,6 +3,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -27,6 +29,16 @@ namespace ITTWEB_Opgave2_Protein.Controllers
             {
                 _userManager = value;
             }
+        }
+
+        [HttpGet]
+        [Authorize]
+        public User GetUserPreferences()
+        {
+            var userId = Request.GetOwinContext().Authentication.User.Identity.GetUserId();
+            var user = _db.Users.FirstOrDefault(x => x.Id == userId);
+
+            return user;
         }
 
         //Based on the OWIN authentication, finds the current authenticated username.        

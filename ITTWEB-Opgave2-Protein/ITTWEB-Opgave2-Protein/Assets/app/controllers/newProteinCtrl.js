@@ -24,6 +24,7 @@
                 $http.get("/api/WsAccount/GetUserPreferences")
                 .success(function (data, status, headers, config) {
                     $scope.userData = data;
+                    getList();
                 })
                 .error(function (data, status, headers, config) {
                     console.log(data);
@@ -45,29 +46,48 @@
                 $scope.dailySummary = {};
                 $scope.dailySummary.total = calcDailyTotal();
                 $scope.dailySummary.daily = calcDailyDaily();
+                $scope.dailySummary.percentage = calcDailyPercentage();
+                $scope.dailySummary.left = calcDailyLeft();
+
             }
 
             var calcDailyTotal = function () {
                 var data = $scope.foodIntakeData;
                 var totalProtein = 0;
                 for (var i = 0; i < data.length; i++) {
-                    console.log(data[i].Protein);
-                    totalProtein += parseFloat(data[i].Protein);
+                    if (data[i].Protein)
+                        totalProtein += parseFloat(data[i].Protein);
                 }
                 return totalProtein.toFixed(2);
             }
+
             var calcDailyDaily = function () {
                 var user = $scope.userData;
                 switch (user.UserType.Id) {
                     case 1:
-                        return user.Weight * 0.8;
+                        return parseFloat(user.Weight) * 0.8;
                     case 2:
-                        return user.Weight * 1.5;
+                        return parseFloat(user.Weight) * 1.5;
                     case 3:
-                        return user.Weight * 2.0;
+                        return parseFloat(user.Weight) * 2.0;
                     default:
                         return 0;
                 }
+            }
+
+            var calcDailyPercentage = function () {
+                var total = parseFloat($scope.dailySummary.total);
+                var daily = parseFloat($scope.dailySummary.daily);
+                if (total === 0 || daily === 0)
+                    return 0;
+
+                return ((total / daily) * 100).toFixed(2);
+            }
+
+            var calcDailyLeft = function () {
+                var total = $scope.dailySummary.total;
+                var daily = $scope.dailySummary.daily;
+                return (daily - total).toFixed(2);
             }
 
             $scope.deleteRow = function (index) {
@@ -78,9 +98,9 @@
                     });
             };
 
-            $scope.updateRow = function (index) {
+            $scope.updateFoodIntake = function (index) {
                 var update = $scope.foodIntakeData[index];
-                $http.post("/api/WsProtein/PostFoodIntake", update)
+                $http.post("/api/WsProtein/UpdateFoodIntake", update)
                     .success(function (data, status, headers, config) {
                         getList();
                     })
@@ -89,6 +109,17 @@
                     });
             };
 
+            $scope.postFoodIntake = function () {
+                var post = $scope.newFoodIntake;
+                post.FoodPosibilityId = post.FoodPosibility.Id;
+                $http.post("/api/WsProtein/PostFoodIntake", post)
+                    .success(function (data, status, headers, config) {
+                        getList();
+                    })
+                    .error(function (data, status, headers, config) {
+                        console.log(data);
+                    });
+            };
 
             var calcEachProtein = function (data) {
                 if (data.Amount && data.FoodPosibility) {
@@ -104,7 +135,6 @@
             }
 
             //Get the current user's list when the page loads.
-            getList();
             getFoodPosibilities();
             getUserPref();
         }
