@@ -128,6 +128,10 @@ namespace ITTWEB_Opgave2_Protein.Models
             #endregion
 
             context.SaveChanges();
+
+            user.FoodPosibilities.Add(potato);
+
+            context.SaveChanges();
         }
     }
 }
