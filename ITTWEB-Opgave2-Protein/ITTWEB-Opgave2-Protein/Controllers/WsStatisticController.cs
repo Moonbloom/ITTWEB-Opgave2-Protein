@@ -18,7 +18,7 @@ namespace ITTWEB_Opgave2_Protein.Controllers
     {
         private readonly DBContext _db = new DBContext();
 
-        [HttpGet]
+        /*[HttpGet]
         [Authorize]
         public List GetStatistic(DateTime Time)
         {
@@ -26,6 +26,6 @@ namespace ITTWEB_Opgave2_Protein.Controllers
             var user = _db.Users.Include(a => a.FoodIntakes).Include(b => b.FoodPosibilities).FirstOrDefault(x => x.Id == userId);
 
              user.FoodIntakes.Where(x => x.Date.ToString("dd-MM-yyyy").Equals(Time.ToString("dd-MM-yyyy"))).ToList();
-        }
+        }*/
     }
 }
