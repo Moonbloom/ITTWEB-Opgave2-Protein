@@ -93,12 +93,12 @@
     background-color: #4caf50;
 }
 
-input.form-control {
-    max-width: 60px;
+input.small {
+    max-width: 80px;
     text-align: center;
 }
 
-button.form-control {
+button.small {
     max-width: 150px;
     text-align: center;
 }

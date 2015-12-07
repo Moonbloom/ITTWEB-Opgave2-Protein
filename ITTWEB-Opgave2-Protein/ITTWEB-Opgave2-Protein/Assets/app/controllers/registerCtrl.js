@@ -32,7 +32,6 @@
             $http.get("/api/WsProtein/GetUserTypes")
                 .success(function(data, status, headers, config) {
                     $scope.availableUserTypes = data;
-
                     $scope.selectedUserType = data[0];
                 });
 

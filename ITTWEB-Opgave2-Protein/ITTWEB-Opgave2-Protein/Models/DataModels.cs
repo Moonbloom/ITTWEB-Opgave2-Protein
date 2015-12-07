@@ -9,6 +9,12 @@ namespace ITTWEB_Opgave2_Protein.Models
 {
     public class User : IdentityUser
     {
+        public User()
+        {
+            FoodIntakes = new HashSet<FoodIntake>();
+            FoodPosibilities = new HashSet<FoodPosibility>();
+        }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -48,6 +54,12 @@ namespace ITTWEB_Opgave2_Protein.Models
 
     public class FoodPosibility
     {
+        public FoodPosibility()
+        {
+            Users = new HashSet<User>();
+            FoodIntakes = new HashSet<FoodIntake>();
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public double ProteinRatio { get; set; }
