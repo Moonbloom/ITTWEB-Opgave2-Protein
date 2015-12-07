@@ -4,7 +4,9 @@
     "home",
     "signIn",
     "register",
-    "newProtein"
+    "newProtein",
+    "setupProtein",
+    "statisticProtein"
 ]);
 
 app.config([
