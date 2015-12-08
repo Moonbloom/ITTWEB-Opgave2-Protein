@@ -2,8 +2,38 @@
 
 <div class="row margin-top-5">
     <div class="col-md-12">
-
-        <input type="date" ng-model="Time" ng-change="getStatistic(Time)" />
-
+        <label>Start date:</label>
+        <input type="date" ng-model="Time" ng-change="getStatistic(Time)" min="2014-01-01" max="2100-01-01" />
+    </div>
+    <div></div>
+</div>
+<div class="row margin-top-5">
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>Date</th>
+                <th>Total protein intake</th>
+                <th>Daily recomended intake</th>
+                <th>Percentage</th>
+                <th>Protein left</th>
+            </tr>
+            <tr ng-repeat="days in rawData">
+                <td>
+                    <div class="small">{{days.summary.date}}</div>
+                </td>
+                <td>
+                    <div class="small">{{days.summary.total}}</div>
+                </td>
+                <td>
+                    <div class="small">{{days.summary.daily}}</div>
+                </td>
+                <td>
+                    <div class="small">{{days.summary.percentage}}</div>
+                </td>
+                <td>
+                    <div class="small">{{days.summary.left}}</div>
+                </td>
+            </tr>
+        </table>
     </div>
 </div>

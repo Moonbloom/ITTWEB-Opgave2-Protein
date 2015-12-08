@@ -13,7 +13,6 @@
             var getList = function () {
                 $http.get("/api/WsProtein/GetFoodIntakes")
                     .success(function (data, status, headers, config) {
-                        console.log(data);
                         $scope.foodIntakeData = calcProtein(data);
                         calcDailySummary();
                     })

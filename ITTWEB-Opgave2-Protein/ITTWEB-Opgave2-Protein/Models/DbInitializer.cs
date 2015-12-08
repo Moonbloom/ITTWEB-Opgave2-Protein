@@ -124,7 +124,7 @@ namespace ITTWEB_Opgave2_Protein.Models
             {
                 UserId = user.Id,
                 Amount = 70,
-                Date = DateTime.Now,
+                Date = DateTime.Now.AddDays(-1),
                 FoodPosibilityId = potato.Id
             };
             context.FoodIntakes.Add(foodIntake1);
@@ -137,6 +137,15 @@ namespace ITTWEB_Opgave2_Protein.Models
                 FoodPosibilityId = greenBeans.Id
             };
             context.FoodIntakes.Add(foodIntake2);
+
+            var foodIntake3 = new FoodIntake
+            {
+                UserId = user.Id,
+                Amount = 90,
+                Date = DateTime.Now.AddHours(1),
+                FoodPosibilityId = ryeBread.Id
+            };
+            context.FoodIntakes.Add(foodIntake3);
             #endregion
 
             context.SaveChanges();
