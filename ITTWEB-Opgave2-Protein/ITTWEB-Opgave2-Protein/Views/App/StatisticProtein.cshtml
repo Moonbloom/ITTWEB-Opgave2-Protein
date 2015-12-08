@@ -22,16 +22,40 @@
                     <div class="small">{{days.summary.date}}</div>
                 </td>
                 <td>
-                    <div class="small">{{days.summary.total}}</div>
+                    <div class="small">{{days.summary.total}} g</div>
                 </td>
                 <td>
-                    <div class="small">{{days.summary.daily}}</div>
+                    <div class="small">{{days.summary.daily}} g</div>
                 </td>
                 <td>
-                    <div class="small">{{days.summary.percentage}}</div>
+                    <div class="small">{{days.summary.percentage}} %</div>
                 </td>
                 <td>
-                    <div class="small">{{days.summary.left}}</div>
+                    <div class="small">{{days.summary.left}} g</div>
+                </td>
+            </tr>
+            <tr id="green"  ng-show="checkArray()">
+                <th>Date</th>   
+                <th>Total protein intake</th>
+                <th>Daily recomended intake</th>
+                <th>Percentage</th>
+                <th>Protein left</th>
+            </tr>
+            <tr ng-model ="average" id="green" ng-show="checkArray()">
+                <td>
+                    <div class="small">This Week</div>
+                </td>
+                <td>
+                    <div class="small">{{average.total}} g</div>
+                </td>
+                <td>
+                    <div class="small">{{average.daily}} g</div>
+                </td>
+                <td>
+                    <div class="small">{{average.percentage}} %</div>
+                </td>
+                <td>
+                    <div class="small">{{average.left}} g</div>
                 </td>
             </tr>
         </table>
