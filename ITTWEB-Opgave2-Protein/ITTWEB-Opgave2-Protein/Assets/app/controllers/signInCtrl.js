@@ -1,6 +1,7 @@
 ﻿angular.module("signIn", ["ngCookies"])
     .controller("signInCtrl", [
-        "$scope", "$rootScope", "$http", "$cookies", "$cookieStore", "$location", "$routeParams", function($scope, $rootScope, $http, $cookies, $cookieStore, $location, $routeParams) {
+        "$scope", "$rootScope", "$http", "$cookies", "$cookieStore", "$location", "$routeParams", function ($scope, $rootScope, $http, $cookies, $cookieStore, $location, $routeParams) {
+
             $scope.message = $routeParams.message;
             $scope.signIn = function() {
                 $scope.showMessage = false;

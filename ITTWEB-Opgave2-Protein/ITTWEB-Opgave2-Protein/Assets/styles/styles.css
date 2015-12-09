@@ -98,9 +98,12 @@ input.small {
     text-align: center;
 }
 
+input.medium {
+    max-width: 180px;
+    text-align: center;
+}
+
 button.small {
     max-width: 150px;
     text-align: center;
 }
-
-

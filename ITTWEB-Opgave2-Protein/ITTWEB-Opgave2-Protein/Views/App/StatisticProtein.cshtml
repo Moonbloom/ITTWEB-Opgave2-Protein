@@ -3,14 +3,13 @@
 <div class="row margin-top-5">
     <div class="col-md-12">
         <label>Start date:</label>
-        <input type="date" ng-model="Time" ng-change="getStatistic(Time)" min="2014-01-01" max="2100-01-01" />
+        <input class="form-control medium" id="startTimePicker" type="date" ng-model="time" ng-change="getStatistic(time)"/>
     </div>
-    <div></div>
 </div>
 <div class="row margin-top-5">
     <div class="col-md-12">
         <table class="table">
-            <tr>
+            <tr ng-show="rawData.length > 0">
                 <th>Date</th>
                 <th>Total protein intake</th>
                 <th>Daily recomended intake</th>
@@ -34,14 +33,17 @@
                     <div class="small">{{days.summary.left}} g</div>
                 </td>
             </tr>
-            <tr id="green"  ng-show="checkArray()">
-                <th>Date</th>   
+        </table>
+        
+        <table class="table" ng-show="rawData">
+            <tr>
+                <th>Date</th>
                 <th>Total protein intake</th>
                 <th>Daily recomended intake</th>
                 <th>Percentage</th>
                 <th>Protein left</th>
             </tr>
-            <tr ng-model ="average" id="green" ng-show="checkArray()">
+            <tr ng-model="average">
                 <td>
                     <div class="small">This Week</div>
                 </td>

@@ -23,7 +23,7 @@ namespace ITTWEB_Opgave2_Protein.Controllers
             private set { _userManager = value; }
         }
 
-        public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; }
+        public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
         public AccountController()
         {

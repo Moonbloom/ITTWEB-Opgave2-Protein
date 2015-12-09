@@ -2,8 +2,13 @@
     .controller("statisticProteinCtrl", [
         "$scope", "$http", function ($scope, $http) {
 
-            $scope.getStatistic = function (Time) {
-                $http.get('/api/WsStatistic/GetStatistic', { params: { time: Time } })
+            $scope.getStatistic = function (selectedTime) {
+                if (!selectedTime) {
+                    $scope.rawData = null;
+                    $scope.average = null;
+                    return;
+                }
+                $http.get('/api/WsStatistic/GetStatistic', { params: { time: selectedTime } })
                 .success(function (data, status) {
                     $scope.rawData = calcProtein(data);
                     for (var i = 0, len = $scope.rawData.length; i < len; i++) {
@@ -21,6 +26,7 @@
                 }
                 return data;
             };
+
             //data is an array of intakes with protein calculated
             var calcDailySummary = function (data) {
                 data.summary = {};
@@ -92,24 +98,17 @@
                     left += parseFloat($scope.rawData[i].summary.left);
                 }
 
-                $scope.average.total = total;
-                $scope.average.daily = daily;
-                $scope.average.left = left;
+                $scope.average.total = total.toFixed(2);
+                $scope.average.daily = daily.toFixed(2);
+                $scope.average.left = left.toFixed(2);
 
                 if (total === 0 || daily === 0) {
-                    $scope.average.percentage =  0;
+                    $scope.average.percentage = 0;
+                } else {
+                    $scope.average.percentage = ((total / daily) * 100).toFixed(2);
                 }
-
-                $scope.average.percentage = ((total / daily) * 100).toFixed(2);
-
-                
             };
 
-            $scope.checkArray = function() {
-                if ($scope.rawData)
-                    return true;    
-                return false;
-            }
             getUserPref();
         }
     ]);
