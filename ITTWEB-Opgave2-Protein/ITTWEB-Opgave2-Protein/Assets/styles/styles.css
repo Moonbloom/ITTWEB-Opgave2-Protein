@@ -1,7 +1,4 @@
-﻿body {
-}
-
-.site-header {
+﻿.site-header {
     /*color: #F2EFDC;*/
     padding: 10px;
 }
@@ -24,9 +21,9 @@
     color: #404040;
 }
 
-    .site-footer footer {
-        margin: 10px;
-    }
+.site-footer footer {
+    margin: 10px;
+}
 
 .site-body {
     background-color: #f8f7f2;
@@ -37,17 +34,6 @@
 .site-username-status {
     list-style-type: none;
     display: inline;
-}
-
-.site-login {
-}
-
-.home-consumer {
-    /*background-color: #888888;*/
-}
-
-.home-contractor {
-    /*background-color:#888666;*/
 }
 
 .dashboard-btn {
@@ -61,8 +47,6 @@
 .strike {
     text-decoration: line-through;
 }
-
-
 
 .margin-top-5 {
     margin-top: 5px;
@@ -106,4 +90,48 @@ input.medium {
 button.small {
     max-width: 150px;
     text-align: center;
+}
+
+.left {
+    float: left;
+    text-align: center;
+    width: 290px;
+}
+
+.left label {
+    padding-left: 40px;
+    text-align: center;
+}
+
+.left ul {
+    min-height: 100px;
+}
+
+.med-top-margin {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+#all-food-posibilities-wrapper, #user-selected-food-posibilities-wrapper {
+    list-style-type: none;
+}
+
+#all-food-posibilities-wrapper li, #user-selected-food-posibilities-wrapper li {
+    background: white;
+    border: 2px solid #eee;
+    margin: 5px;
+    padding: 5px;
+    font-size: 1.2em;
+}
+
+.connectedSortable li:hover {
+    cursor: pointer;
+}
+
+.connectedSortable li.ui-sortable-helper {
+    cursor: move;
+}
+
+.hidden {
+    display: none !important;
 }

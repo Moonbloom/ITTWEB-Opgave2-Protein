@@ -8,7 +8,7 @@ namespace ITTWEB_Opgave2_Protein
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bootstrap").Include(
-                "~/Assets/Bootstrap/js/bootstrap.js"));
+                "~/Assets/bootstrap/js/bootstrap.js"));
 
             //Moved bootstrap css to own style tag in the _layout page.  This is to remove it from the optimizations which was breaking the fonts and icons.
             bundles.Add(new StyleBundle("~/styles").IncludeDirectory("~/Assets", "*.css", true));
@@ -26,11 +26,12 @@ namespace ITTWEB_Opgave2_Protein
 
             bundles.Add(new ScriptBundle("~/app").IncludeDirectory("~/Assets/app", "*.js", true));
 
-            bundles.Add(new ScriptBundle("~/jquery").Include(
-                "~/Assets/jquery/jquery.min.js"));
-
             //bundles.Add(new ScriptBundle("~/jquery").Include(
-            //    "~/Assets/jquery/jquery.js"));
+            //    "~/Assets/jquery/jquery.min.js"));
+
+            bundles.Add(new ScriptBundle("~/jquery").Include(
+                "~/Assets/jquery/jquery.js",
+                "~/Assets/jquery/jquery-ui.js"));
 
             bundles.Add(new ScriptBundle("~/misc").IncludeDirectory("~/Assets/misc", "*.js", true));
 

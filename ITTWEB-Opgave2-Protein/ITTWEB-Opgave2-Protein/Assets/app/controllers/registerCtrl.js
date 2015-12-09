@@ -10,8 +10,6 @@
                     UserTypeId: $scope.selectedUserType.Id
                 };
 
-                console.log(params);
-
                 $http.post("/api/Account/Register", params)
                     .success(function(data, status, headers, config) {
                         $scope.successMessage = "Registration Complete. You can now sign in with your new account.";

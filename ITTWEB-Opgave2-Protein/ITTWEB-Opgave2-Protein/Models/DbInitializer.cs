@@ -7,6 +7,7 @@ namespace ITTWEB_Opgave2_Protein.Models
     {
         protected override void Seed(DBContext context)
         {
+            #region UserTypes
             var userType1 = new UserType
             {
                 Id = 1,
@@ -27,8 +28,9 @@ namespace ITTWEB_Opgave2_Protein.Models
                 Name = "Training Adult"
             };
             context.UserTypes.Add(userType3);
+            #endregion
 
-            #region FoodPosibilitySeed
+            #region FoodPosibility
             var potato = new FoodPosibility
             {
                 Id = 1,
@@ -103,35 +105,52 @@ namespace ITTWEB_Opgave2_Protein.Models
             #endregion
 
             #region User
-            var user = new User
+            var kasper = new User
             {
                 Id = "24bbcc10-5ab3-4beb-9261-da210cda00eb",
                 UserTypeId = 1,
                 Weight = 80,
-                Email = "lol",
-                PasswordHash = "ANyTo3lyBaGCuF7QqPr1pCZel2nRM2rWYjqepLSqtNoYfoPTO9X7bZICaoJL7jSISg==",
-                SecurityStamp = "704ea163-b098-4dea-b027-bbd1bea72a0d",
-                UserName = "lol"
+                Email = "kasper",
+                PasswordHash = "APKerMrbme1u5K+2OR8LRgGVcWBZltgTNXmK/JJgeulosJgMLJT3gfKVyE2WcgpYJg==",
+                SecurityStamp = "4e9b0901-bf41-4d55-9e0c-4767454d8898",
+                UserName = "kasper"
             };
-            user.FoodPosibilities.Add(potato);
-            user.FoodPosibilities.Add(greenBeans);
-            user.FoodPosibilities.Add(ryeBread);
-            context.Users.Add(user);
+            potato.Users.Add(kasper);
+            greenBeans.Users.Add(kasper);
+            ryeBread.Users.Add(kasper);
+
+            context.Users.Add(kasper);
+
+            var christian = new User
+            {
+                Id = "bd955647-3d5d-4bea-abcc-c47954ef0c56",
+                UserTypeId = 1,
+                Weight = 60,
+                Email = "christian",
+                PasswordHash = "AJPwSFNw21p7xAiX1PSDzpxMF1ukWrDWseoKC+n9grmKpbqHL/nhqq4SylJrSXksVQ==",
+                SecurityStamp = "0172c2f0-c6d5-43bf-bb69-531abeb59a18",
+                UserName = "christian"
+            };
+            potato.Users.Add(christian);
+            ryeBread.Users.Add(christian);
+            pork.Users.Add(christian);
+
+            context.Users.Add(christian);
             #endregion
 
-            #region Food intake
+            #region FoodIntake
             var foodIntake1 = new FoodIntake
             {
-                UserId = user.Id,
+                UserId = kasper.Id,
                 Amount = 70,
-                Date = DateTime.Now.AddDays(-1),
+                Date = DateTime.Now,
                 FoodPosibilityId = potato.Id
             };
             context.FoodIntakes.Add(foodIntake1);
 
             var foodIntake2 = new FoodIntake
             {
-                UserId = user.Id,
+                UserId = kasper.Id,
                 Amount = 110,
                 Date = DateTime.Now,
                 FoodPosibilityId = greenBeans.Id
@@ -140,9 +159,9 @@ namespace ITTWEB_Opgave2_Protein.Models
 
             var foodIntake3 = new FoodIntake
             {
-                UserId = user.Id,
+                UserId = kasper.Id,
                 Amount = 90,
-                Date = DateTime.Now.AddHours(1),
+                Date = DateTime.Now,
                 FoodPosibilityId = ryeBread.Id
             };
             context.FoodIntakes.Add(foodIntake3);

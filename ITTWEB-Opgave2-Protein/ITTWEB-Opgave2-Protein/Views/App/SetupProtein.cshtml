@@ -1,9 +1,28 @@
 ﻿<h2>Setup</h2>
 
 <div class="row margin-top-5">
-    <div class="col-md-12">
-        <ul class="list-group margin-top-5">
-            
-        </ul>
+    <div class="col-md-12 margin-top-5">
+        <div class="left">
+            <label>All posibilities</label>
+            <ul id="all-food-posibilities-wrapper" class="connectedSortable">
+                <li ng-repeat="posibility in allFoodPosibilities">
+                    <div class="hidden id">{{posibility.Id}}</div>
+                    <div>{{posibility.Name}}</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="left">
+            <label>Chosen posibilities</label>
+            <ul id="user-selected-food-posibilities-wrapper" class="connectedSortable">
+                <li ng-repeat="posibility in userSelectedFoodPosibilities">
+                    <div class="hidden id">{{posibility.Id}}</div>
+                    <div>{{posibility.Name}}</div>
+                </li>
+            </ul>
+        </div>
+
     </div>
+    
+    <button class="form-control small med-top-margin" ng-click="updateFoodPosibilities()">Update</button>
 </div>

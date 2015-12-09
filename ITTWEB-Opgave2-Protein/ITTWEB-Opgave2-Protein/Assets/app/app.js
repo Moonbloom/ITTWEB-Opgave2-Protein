@@ -99,15 +99,11 @@ app.run([
     "$rootScope", "$http", "$cookies", "$cookieStore", function($rootScope, $http, $cookies, $cookieStore) {
 
         $rootScope.logout = function() {
-
             $http.post("/api/Account/Logout")
                 .success(function(data, status, headers, config) {
                     $http.defaults.headers.common.Authorization = null;
                     $http.defaults.headers.common.RefreshToken = null;
-                    $cookieStore.remove("_Token");
-                    $cookieStore.remove("_RefreshToken");
-                    $rootScope.username = "";
-                    $rootScope.loggedIn = false;
+                    handleLogout();
                     window.location = "#/signin";
                 });
         };
@@ -117,33 +113,43 @@ app.run([
                 var params = "grant_type=refresh_token&refresh_token=" + $http.defaults.headers.common.RefreshToken;
                 //console.log("ChangeSuccess: " + params);
                 $http({
-                        url: "/Token",
-                        method: "POST",
-                        headers: { 'Content-Type': "application/x-www-form-urlencoded" },
-                        data: params
-                    })
-                    .success(function(data, status, headers, config) {
-                        $http.defaults.headers.common.Authorization = "Bearer " + data.access_token;
-                        $http.defaults.headers.common.RefreshToken = data.refresh_token;
+                    url: "/Token",
+                    method: "POST",
+                    headers: { 'Content-Type': "application/x-www-form-urlencoded" },
+                    data: params
+                })
+                .success(function(data, status, headers, config) {
+                    $http.defaults.headers.common.Authorization = "Bearer " + data.access_token;
+                    $http.defaults.headers.common.RefreshToken = data.refresh_token;
 
-                        $cookieStore.put("_Token", data.access_token);
-                        $cookieStore.put("_RefreshToken", data.refresh_token);
+                    $cookieStore.put("_Token", data.access_token);
+                    $cookieStore.put("_RefreshToken", data.refresh_token);
 
-                        $http.get("/api/WsAccount/GetCurrentUserName")
-                            .success(function(data, status, headers, config) {
-                                if (data !== "null") {
-                                    $rootScope.username = data.replace(/["']{1}/gi, ""); //Remove any quotes from the username before pushing it out.
-                                    $rootScope.loggedIn = true;
-                                } else
-                                    $rootScope.loggedIn = false;
-                            });
-
-
-                    })
-                    .error(function(data, status, headers, config) {
-                        $rootScope.loggedIn = false;
-                    });
+                    $http.get("/api/WsAccount/GetCurrentUserName")
+                        .success(function (data, status, headers, config) {
+                            if (data !== "null") {
+                                $rootScope.username = data.replace(/["']{1}/gi, ""); //Remove any quotes from the username before pushing it out.
+                                handleLogin();
+                            } else {
+                                handleLogout();
+                            }
+                        });
+                })
+                .error(function(data, status, headers, config) {
+                    handleLogout();
+                });
             }
         });
+
+        var handleLogin = function() {
+            $rootScope.loggedIn = true;
+        };
+
+        var handleLogout = function () {
+            $rootScope.loggedIn = false;
+            $cookieStore.remove("_Token");
+            $cookieStore.remove("_RefreshToken");
+            $rootScope.username = "";
+        };
     }
 ]);

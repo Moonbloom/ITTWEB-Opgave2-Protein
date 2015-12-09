@@ -177,6 +177,7 @@
     <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\WsAccountController.cs" />
+    <Compile Include="Controllers\WsSetupController.cs" />
     <Compile Include="Controllers\WsStatisticController.cs" />
     <Compile Include="Controllers\WsProteinController.cs" />
     <Compile Include="Global.asax.cs">
@@ -209,6 +210,7 @@
     <Content Include="Assets\bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Assets\bootstrap\js\bootstrap.js" />
     <Content Include="Assets\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Assets\jquery\jquery-ui.js" />
     <Content Include="Assets\jquery\jquery.js" />
     <Content Include="Assets\jquery\jquery.min.js" />
     <Content Include="Assets\misc\modernizr.min.js" />
